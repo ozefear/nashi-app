@@ -90,7 +90,7 @@ struct ToolEditor:View {
     var category:FileCategory { input.map(FileCategory.detect) ?? .other }
     var isGIFMetadata:Bool { input?.pathExtension.lowercased()=="gif" }
     var usesImageMetadata:Bool { category == .image || isGIFMetadata }
-    var visual:Bool { [.editImage,.annotateImage,.cropImage,.frameImage,.redactImage,.createCollage].contains(tool) }
+    var visual:Bool { [.editImage,.annotateImage,.cropImage,.frameImage,.removeBackground,.redactImage,.createCollage].contains(tool) }
     var video:Bool { category == .video && ![.removeMetadata,.compress,.joinVideos].contains(tool) }
     var audio:Bool { category == .audio && tool != .removeMetadata && tool != .compress }
     var sideBySide:Bool { visual || video || audio }
@@ -171,6 +171,7 @@ struct ToolEditor:View {
         case .editImage:return "Little tweaks. A whole new look."
         case .annotateImage:return "Make your point."
         case .frameImage:return "Give it a little breathing room."
+        case .removeBackground:return "Clear the backdrop. Keep the subject."
         case .compress:return "Make some space. Keep what matters."
         case .removeMetadata:return "Choose what your file shares."
         case .createCollage:return "Better together."
@@ -183,6 +184,7 @@ struct ToolEditor:View {
         case .editImage:return "Save edited copy"
         case .annotateImage:return "Save annotated copy"
         case .frameImage:return "Save with background"
+        case .removeBackground:return "Save transparent PNG"
         case .redactImage,.redactVideo:return "Save redacted copy"
         case .redactAudio:return options.audioMode == "bleep" ? "Save bleeped copy":"Save muted copy"
         case .audioToVideo:return "Create visualization"
@@ -220,6 +222,7 @@ struct ToolEditor:View {
         case .editImage: imageControls
         case .annotateImage: annotationControls
         case .frameImage: frameControls
+        case .removeBackground: backgroundRemovalControls
         case .createCollage: collageControls
         case .redactImage,.redactVideo: redactionControls
         case .trimVideo,.trimAudio: trimControls
@@ -388,6 +391,14 @@ struct ToolEditor:View {
             slider("Corners",value:frame(\.cornerRadius),range:0...100,unit:"px")
             slider("Shadow",value:frame(\.shadowRadius),range:0...80,unit:"px")
             HStack { ForEach(["Auto","1:1","16:9","4:5"],id:\.self) { label in Button(LocalizedStringKey(label)) { var f=options.imageFrame ?? .init();let a=label.split(separator:":").compactMap{Double($0)};f.aspectRatio=a.count==2 ? a[0]/a[1]:nil;options.imageFrame=f } } }
+        }
+    }
+    var backgroundRemovalControls:some View {
+        VStack(alignment:.leading,spacing:14) {
+            Text("Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact.").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal:false,vertical:true)
+            slider("Tolerance",value:$options.backgroundRemovalTolerance,range:0...0.5,reset:0.12)
+            slider("Edge feather",value:$options.backgroundRemovalFeather,range:0...0.25,reset:0.03)
+            Label("The result is saved as a transparent PNG. Your original stays unchanged.",systemImage:"checkerboard.rectangle").font(.caption).foregroundStyle(.secondary)
         }
     }
     var collageControls:some View {

@@ -343,6 +343,7 @@
 "BACKGROUND BLUR" = "ARKA PLAN BULANIKLIĞI";
 "BACKGROUND COLOR" = "ARKA PLAN RENGİ";
 "BACKGROUND IMAGE…" = "ARKA PLAN GÖRSELİ…";
+"BACKGROUND TOLERANCE (%)" = "ARKA PLAN TOLERANSI (%)";
 "BALANCED" = "DENGELİ";
 "BARS" = "ÇUBUKLAR";
 "BESIDE ORIGINAL FILES" = "ORİJİNAL DOSYALARIN YANINA";
@@ -363,6 +364,7 @@
 "Background Image…" = "Arka Plan Görseli…";
 "Background blur" = "Arka plan bulanıklığı";
 "Background color" = "Arka plan rengi";
+"Background tolerance (%)" = "Arka plan toleransı (%)";
 "Balanced" = "Dengeli";
 "Bars" = "Çubuklar";
 "Beside original files" = "Orijinal dosyaların yanına";
@@ -491,6 +493,7 @@
 "CLEAR" = "TEMİZLE";
 "CLEAR FLOAT" = "YÜZEN PENCEREYİ TEMİZLE";
 "CLEAR SELECTION" = "SEÇİMİ TEMİZLE";
+"CLEAR THE BACKDROP. KEEP THE SUBJECT." = "ARKA PLANI TEMİZLE. KONUYU KORU.";
 "CLIPBOARD IS BUSY. TRY AGAIN." = "PANO MEŞGUL. TEKRAR DENE.";
 "CLIPBOARD IS BUSY. TRY PASTE AGAIN." = "PANO MEŞGUL. YENİDEN YAPIŞTIRMAYI DENE.";
 "CLOSE" = "KAPAT";
@@ -689,6 +692,7 @@
 "Clear" = "Temizle";
 "Clear Float" = "Yüzen Pencereyi Temizle";
 "Clear Selection" = "Seçimi Temizle";
+"Clear the backdrop. Keep the subject." = "Arka planı temizle. Konuyu koru.";
 "Clip %@" = "Klip %@";
 "Clip %lld" = "Klip %lld";
 "Clipboard is busy. Try Paste again." = "Pano meşgul. Yeniden yapıştırmayı dene.";
@@ -976,6 +980,8 @@
 "Drop it like it’s… a file." = "Dosyanı buraya bırak.";
 "Drop something good." = "Bir dosya bırak.";
 "Duplicate" = "Çoğalt";
+"EDGE FEATHER" = "KENAR YUMUŞATMA";
+"EDGE FEATHER (%)" = "KENAR YUMUŞATMA (%)";
 "EDIT" = "DÜZENLE";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED AUDIO AND VIDEO STAY UNTOUCHED." = "ALANLARI DÜZENLE YA DA META VERİLERİ KALDIR. KODLANMIŞ SES VE GÖRÜNTÜ DEĞİŞMEZ.";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED IMAGE PIXELS STAY UNTOUCHED." = "ALANLARI DÜZENLE YA DA META VERİLERİ KALDIR. GÖRSELİN PİKSELLERİ DEĞİŞMEZ.";
@@ -1006,6 +1012,8 @@
 "EXPOSURE" = "POZLAMA";
 "EXTRACT ARCHIVE" = "ARŞİVİ AÇ";
 "EXTRACT NASHI INTO ITS OWN WRITABLE FOLDER FIRST." = "ÖNCE NASHI'Yİ YAZILABİLİR, KENDİNE AİT BİR KLASÖRE ÇIKAR.";
+"Edge feather" = "Kenar yumuşatma";
+"Edge feather (%)" = "Kenar yumuşatma (%)";
 "Edit" = "Düzenle";
 "Edit Image" = "Görseli Düzenle";
 "Edit Photo" = "Fotoğrafı Düzenle";
@@ -1939,6 +1947,7 @@
 "REMOVE SELECTED RANGE" = "SEÇİLİ ARALIĞI KALDIR";
 "REMOVE SILENCE AT THE BEGINNING AND END" = "BAŞLANGIÇ VE SONDAKİ SESSİZLİĞİ KALDIR";
 "REMOVE SILENCE FROM BEGINNING AND END" = "BAŞLANGIÇ VE SONDAKİ SESSİZLİĞİ KALDIR";
+"REMOVES A SOLID OR NEAR-SOLID BACKGROUND CONNECTED TO THE IMAGE EDGE. ENCLOSED MATCHING COLORS STAY INTACT." = "GÖRSELİN KENARINA BAĞLI DÜZ VEYA DÜZE YAKIN ARKA PLANI KALDIRIR. İÇERİDE KAPALI KALAN EŞLEŞEN RENKLER KORUNUR.";
 "RENDERED PAGES EXCEED 512 MB. CHOOSE A LOWER DPI OR SPLIT THE PDF FIRST." = "OLUŞTURULAN SAYFALAR 512 MB'I AŞIYOR. DAHA DÜŞÜK BİR DPI SEÇ VEYA ÖNCE PDF'Yİ BÖL.";
 "REPLACE SELECTED AUDIO WITH" = "SEÇİLİ SESİ ŞUNUNLA DEĞİŞTİR";
 "REPORT SAVED." = "RAPOR KAYDEDİLDİ.";
@@ -2012,6 +2021,7 @@
 "Remove selected range" = "Seçili aralığı kaldır";
 "Remove silence at the beginning and end" = "Başlangıç ve sondaki sessizliği kaldır";
 "Remove silence from beginning and end" = "Başlangıç ve sondaki sessizliği kaldır";
+"Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact." = "Görselin kenarına bağlı düz veya düze yakın arka planı kaldırır. İçeride kapalı kalan eşleşen renkler korunur.";
 "Rendered pages exceed 512 MB. Choose a lower DPI or split the PDF first." = "Oluşturulan sayfalar 512 MB'ı aşıyor. Daha düşük bir DPI seç veya önce PDF'yi böl.";
 "Rendering page %@" = "Sayfa %@ işleniyor";
 "Rendering page %lld" = "Sayfa %lld işleniyor";
@@ -2070,6 +2080,7 @@
 "SAVE SPEED COPY" = "HIZI DEĞİŞTİRİLMİŞ KOPYAYI KAYDET";
 "SAVE THE ARCHIVE OUTSIDE THE FOLDER BEING ZIPPED." = "ARŞİVİ SIKIŞTIRILAN KLASÖRÜN DIŞINA KAYDET.";
 "SAVE TO" = "KAYIT YERİ";
+"SAVE TRANSPARENT PNG" = "ŞEFFAF PNG KAYDET";
 "SAVE TRIMMED COPY" = "KIRPILMIŞ KOPYAYI KAYDET";
 "SAVE WITH BACKGROUND" = "ARKA PLANLA KAYDET";
 "SAVED 1 NEW FILE. ORIGINALS KEPT." = "1 YENİ DOSYA KAYDEDİLDİ. ORİJİNAL KORUNDU.";
@@ -2221,6 +2232,7 @@
 "Save speed copy" = "Hızı değiştirilmiş kopyayı kaydet";
 "Save the archive outside the folder being zipped." = "Arşivi sıkıştırılan klasörün dışına kaydet.";
 "Save to" = "Kayıt yeri";
+"Save transparent PNG" = "Şeffaf PNG kaydet";
 "Save trimmed copy" = "Kırpılmış kopyayı kaydet";
 "Save with background" = "Arka planla kaydet";
 "Saved %@ new files. Originals kept." = "%@ yeni dosya kaydedildi. Orijinaller korundu.";
@@ -2404,6 +2416,7 @@
 "THE REQUESTED PDF SIZE COULD NOT BE REACHED. CHOOSE A LARGER TARGET." = "İSTENEN PDF BOYUTUNA İNİLEMEDİ. DAHA BÜYÜK BİR HEDEF SEÇ.";
 "THE REQUESTED SIZE CANNOT BE REACHED WITH THIS FORMAT. CHOOSE A LARGER TARGET SIZE OR A SMALLER VIDEO RESOLUTION." = "BU BİÇİMLE İSTENEN BOYUTA ULAŞILAMIYOR. DAHA BÜYÜK BİR HEDEF BOYUT VEYA DAHA DÜŞÜK BİR VİDEO ÇÖZÜNÜRLÜĞÜ SEÇ.";
 "THE REQUESTED SIZE IS TOO SMALL FOR A MEDIA CONTAINER. CHOOSE AT LEAST 2 KB." = "İSTENEN BOYUT BİR MEDYA KAPSAYICISI İÇİN ÇOK KÜÇÜK. EN AZ 2 KB SEÇ.";
+"THE RESULT IS SAVED AS A TRANSPARENT PNG. YOUR ORIGINAL STAYS UNCHANGED." = "SONUÇ ŞEFFAF PNG OLARAK KAYDEDİLİR. ORİJİNALİNİZ DEĞİŞMEDEN KALIR.";
 "THE SAME CONVERSION AND TOOL CATALOG AS MACOS." = "MACOS İLE AYNI DÖNÜŞTÜRME VE ARAÇ SEÇENEKLERİ.";
 "THE SELECTED RECTANGLE MUST BE INSIDE THE VIDEO AND AT LEAST 2 × 2 PIXELS." = "SEÇİLEN DİKDÖRTGEN VİDEONUN İÇİNDE KALMALI VE EN AZ 2 × 2 PİKSEL OLMALI.";
 "THE SIGNED PACKAGE VERSION DOES NOT MATCH THIS UPDATE." = "İMZALI PAKETİN SÜRÜMÜ BU GÜNCELLEMEYLE EŞLEŞMİYOR.";
@@ -2469,6 +2482,7 @@
 "THUMBNAIL" = "KÜÇÜK RESİM";
 "TIMES (SECONDS)" = "ZAMANLAR (SANİYE)";
 "TINT" = "TON";
+"TOLERANCE" = "TOLERANS";
 "TOO MANY FILES ALREADY USE THIS NAME." = "BU ADI KULLANAN ÇOK FAZLA DOSYA VAR.";
 "TOO MANY IMAGE REDIRECTS." = "GÖRSEL ÇOK FAZLA KEZ YÖNLENDİRİLDİ.";
 "TOO MANY UPDATE FILES." = "GÜNCELLEMEDE ÇOK FAZLA DOSYA VAR.";
@@ -2567,6 +2581,7 @@
 "The requested image size could not be reached. Choose a larger target." = "İstenen görsel boyutuna inilemedi. Daha büyük bir hedef seç.";
 "The requested size cannot be reached with this format. Choose a larger target size or a smaller video resolution." = "Bu biçimle istenen boyuta ulaşılamıyor. Daha büyük bir hedef boyut veya daha düşük bir video çözünürlüğü seç.";
 "The requested size is too small for a media container. Choose at least 2 KB." = "İstenen boyut bir medya kapsayıcısı için çok küçük. En az 2 KB seç.";
+"The result is saved as a transparent PNG. Your original stays unchanged." = "Sonuç şeffaf PNG olarak kaydedilir. Orijinaliniz değişmeden kalır.";
 "The same conversion and tool catalog as macOS." = "macOS ile aynı dönüştürme ve araç seçenekleri.";
 "The selected rectangle must be inside the video and at least 2 × 2 pixels." = "Seçilen dikdörtgen videonun içinde kalmalı ve en az 2 × 2 piksel olmalı.";
 "The signed package version does not match this update." = "İmzalı paketin sürümü bu güncellemeyle eşleşmiyor.";
@@ -2638,6 +2653,7 @@
 "Thumbnail" = "Küçük resim";
 "Times (seconds)" = "Zamanlar (saniye)";
 "Tint" = "Ton";
+"Tolerance" = "Tolerans";
 "Too many files already use this name." = "Bu adı kullanan çok fazla dosya var.";
 "Too many image redirects." = "Görsel çok fazla kez yönlendirildi.";
 "Too many update files." = "Güncellemede çok fazla dosya var.";

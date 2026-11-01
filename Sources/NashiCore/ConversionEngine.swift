@@ -63,7 +63,7 @@ public enum ConversionEngine {
                     default: throw NashiError.unsupported("This tool does not support \(input.pathExtension.uppercased()) files.")
                     }
                 }
-            case .editImage,.annotateImage,.frameImage,.cropImage,.createCollage,.redactImage:
+            case .editImage,.annotateImage,.frameImage,.removeBackground,.cropImage,.createCollage,.redactImage:
                 outputs=try ImageEngine.tool(tool,inputs:request.inputs,options:request.options,token:token)
             default: outputs=try MediaEngine.tool(tool,inputs:request.inputs,options:request.options,token:token,progress:progress)
             }

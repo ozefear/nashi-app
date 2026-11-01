@@ -213,6 +213,7 @@ public sealed partial class ToolEditor:Window
         try
         {
             if(tool=="compress"&&(Value("Target size (KB; 0 = auto)")<0||Value("Reduction (%; 0 = auto)")<0||Value("Reduction (%; 0 = auto)")>=100))throw new ArgumentException("Choose a positive size or a reduction below 100%. Zero uses automatic compression.");
+            if(tool=="removeBackground"&&(Value("Background tolerance (%)") is <0 or >100||Value("Edge feather (%)") is <0 or >100))throw new ArgumentException("Background tolerance and edge feather must be between 0 and 100%.");
             if(tool is "trimVideo" or "trimAudio"||tool=="redactAudio"&&bleepRanges.Count==0)ReadPlaybackRange();
             var x=Value("X");var y=Value("Y");var w=Value("Width");var h=Value("Height");
             if(tool is "crop" or "cropVideo" or "redactVideo"&& (w<1||h<1)||tool=="redactVideo"&&bitmap is not null&&videoRegions.Count==0)throw new ArgumentException("Drag an area first.");

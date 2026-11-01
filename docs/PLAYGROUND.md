@@ -9,7 +9,7 @@ The English and Turkish landing pages use an independent implementation of Nashi
 - Shift-click selects multiple files. Batch wheels use the intersection of the app catalog's formats and tools.
 - Touch users tap a file, then a mode and a wheel option.
 - All 46 input extensions and 276 conversion routes can be explored using the sample-input selector.
-- All 27 tools have an interactive window. The feature filters show tools by file family.
+- All 28 tools have an interactive window. The feature filters show tools by file family.
 - The wheel follows the native 320-point rounded geometry, including the area-centroid labels for three-, five- and eight-item menus. Conversion petals omit icons, and the center shows the hovered option. Tool names, Turkish translations, editor headings/hints/actions and the light/dark palette are generated from the desktop sources.
 - Appearance switches only the interactive demo; the landing page keeps its own theme.
 - Library stores the current visit's exports and explicitly labeled app previews. Float is a temporary shelf within the sample desktop: a thumbnail stack and paperclip expand into the narrow icon/list shelf, with multi-selection, Space preview, reference removal and drop-to-add. It does not expose local filesystem dragging from the browser.

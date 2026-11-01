@@ -343,6 +343,7 @@
 "BACKGROUND BLUR" = "FLOU D’ARRIÈRE-PLAN";
 "BACKGROUND COLOR" = "COULEUR D’ARRIÈRE-PLAN";
 "BACKGROUND IMAGE…" = "IMAGE D’ARRIÈRE-PLAN…";
+"BACKGROUND TOLERANCE (%)" = "TOLÉRANCE DU FOND (%)";
 "BALANCED" = "ÉQUILIBRÉ";
 "BARS" = "BARRES";
 "BESIDE ORIGINAL FILES" = "À CÔTÉ DES FICHIERS D’ORIGINE";
@@ -363,6 +364,7 @@
 "Background Image…" = "Image d’arrière-plan…";
 "Background blur" = "Flou d’arrière-plan";
 "Background color" = "Couleur d’arrière-plan";
+"Background tolerance (%)" = "Tolérance du fond (%)";
 "Balanced" = "Équilibré";
 "Bars" = "Barres";
 "Beside original files" = "À côté des fichiers d’origine";
@@ -491,6 +493,7 @@
 "CLEAR" = "EFFACER";
 "CLEAR FLOAT" = "VIDER LE FLOAT";
 "CLEAR SELECTION" = "EFFACER LA SÉLECTION";
+"CLEAR THE BACKDROP. KEEP THE SUBJECT." = "EFFACEZ LE FOND. GARDEZ LE SUJET.";
 "CLIPBOARD IS BUSY. TRY AGAIN." = "LE PRESSE-PAPIERS EST OCCUPÉ. RÉESSAYEZ.";
 "CLIPBOARD IS BUSY. TRY PASTE AGAIN." = "LE PRESSE-PAPIERS EST OCCUPÉ. RÉESSAYEZ DE COLLER.";
 "CLOSE" = "FERMER";
@@ -689,6 +692,7 @@
 "Clear" = "Effacer";
 "Clear Float" = "Vider le Float";
 "Clear Selection" = "Effacer la sélection";
+"Clear the backdrop. Keep the subject." = "Effacez le fond. Gardez le sujet.";
 "Clip %@" = "Clip %@";
 "Clip %lld" = "Clip %lld";
 "Clipboard is busy. Try Paste again." = "Le presse-papiers est occupé. Réessayez de coller.";
@@ -976,6 +980,8 @@
 "Drop it like it’s… a file." = "Déposez-le comme si c’était… un fichier.";
 "Drop something good." = "Déposez quelque chose de bien.";
 "Duplicate" = "Dupliquer";
+"EDGE FEATHER" = "ADOUCISSEMENT DU BORD";
+"EDGE FEATHER (%)" = "ADOUCISSEMENT DU BORD (%)";
 "EDIT" = "ÉDITION";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED AUDIO AND VIDEO STAY UNTOUCHED." = "MODIFIEZ LES CHAMPS OU SUPPRIMEZ LES MÉTADONNÉES. L’AUDIO ET LA VIDÉO ENCODÉS RESTENT INCHANGÉS.";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED IMAGE PIXELS STAY UNTOUCHED." = "MODIFIEZ LES CHAMPS OU SUPPRIMEZ LES MÉTADONNÉES. LES PIXELS ENCODÉS DE L’IMAGE RESTENT INCHANGÉS.";
@@ -1006,6 +1012,8 @@
 "EXPOSURE" = "EXPOSITION";
 "EXTRACT ARCHIVE" = "EXTRAIRE L’ARCHIVE";
 "EXTRACT NASHI INTO ITS OWN WRITABLE FOLDER FIRST." = "EXTRAYEZ D’ABORD NASHI DANS SON PROPRE DOSSIER ACCESSIBLE EN ÉCRITURE.";
+"Edge feather" = "Adoucissement du bord";
+"Edge feather (%)" = "Adoucissement du bord (%)";
 "Edit" = "Édition";
 "Edit Image" = "Modifier l’image";
 "Edit Photo" = "Modifier la photo";
@@ -1939,6 +1947,7 @@
 "REMOVE SELECTED RANGE" = "RETIRER LA PLAGE SÉLECTIONNÉE";
 "REMOVE SILENCE AT THE BEGINNING AND END" = "SUPPRIMER LE SILENCE AU DÉBUT ET À LA FIN";
 "REMOVE SILENCE FROM BEGINNING AND END" = "SUPPRIMER LE SILENCE AU DÉBUT ET À LA FIN";
+"REMOVES A SOLID OR NEAR-SOLID BACKGROUND CONNECTED TO THE IMAGE EDGE. ENCLOSED MATCHING COLORS STAY INTACT." = "SUPPRIME UN FOND UNI OU PRESQUE UNI RELIÉ AU BORD DE L’IMAGE. LES COULEURS CORRESPONDANTES ENFERMÉES RESTENT INTACTES.";
 "RENDERED PAGES EXCEED 512 MB. CHOOSE A LOWER DPI OR SPLIT THE PDF FIRST." = "LES PAGES RENDUES DÉPASSENT 512 MO. CHOISISSEZ UN DPI PLUS BAS OU DIVISEZ D’ABORD LE PDF.";
 "REPLACE SELECTED AUDIO WITH" = "REMPLACER L’AUDIO SÉLECTIONNÉ PAR";
 "REPORT SAVED." = "RAPPORT ENREGISTRÉ.";
@@ -2012,6 +2021,7 @@
 "Remove selected range" = "Retirer la plage sélectionnée";
 "Remove silence at the beginning and end" = "Supprimer le silence au début et à la fin";
 "Remove silence from beginning and end" = "Supprimer le silence au début et à la fin";
+"Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact." = "Supprime un fond uni ou presque uni relié au bord de l’image. Les couleurs correspondantes enfermées restent intactes.";
 "Rendered pages exceed 512 MB. Choose a lower DPI or split the PDF first." = "Les pages rendues dépassent 512 Mo. Choisissez un DPI plus bas ou divisez d’abord le PDF.";
 "Rendering page %@" = "Rendu de la page %@";
 "Rendering page %lld" = "Rendu de la page %lld";
@@ -2070,6 +2080,7 @@
 "SAVE SPEED COPY" = "ENREGISTRER LA COPIE À VITESSE MODIFIÉE";
 "SAVE THE ARCHIVE OUTSIDE THE FOLDER BEING ZIPPED." = "ENREGISTREZ L’ARCHIVE EN DEHORS DU DOSSIER COMPRESSÉ.";
 "SAVE TO" = "ENREGISTRER DANS";
+"SAVE TRANSPARENT PNG" = "ENREGISTRER LE PNG TRANSPARENT";
 "SAVE TRIMMED COPY" = "ENREGISTRER LA COPIE ÉLAGUÉE";
 "SAVE WITH BACKGROUND" = "ENREGISTRER AVEC L’ARRIÈRE-PLAN";
 "SAVED 1 NEW FILE. ORIGINALS KEPT." = "1 NOUVEAU FICHIER ENREGISTRÉ. ORIGINAUX CONSERVÉS.";
@@ -2221,6 +2232,7 @@
 "Save speed copy" = "Enregistrer la copie à vitesse modifiée";
 "Save the archive outside the folder being zipped." = "Enregistrez l’archive en dehors du dossier compressé.";
 "Save to" = "Enregistrer dans";
+"Save transparent PNG" = "Enregistrer le PNG transparent";
 "Save trimmed copy" = "Enregistrer la copie élaguée";
 "Save with background" = "Enregistrer avec l’arrière-plan";
 "Saved %@ new files. Originals kept." = "%@ nouveaux fichiers enregistrés. Originaux conservés.";
@@ -2404,6 +2416,7 @@
 "THE REQUESTED PDF SIZE COULD NOT BE REACHED. CHOOSE A LARGER TARGET." = "LA TAILLE DE PDF DEMANDÉE N’A PAS PU ÊTRE ATTEINTE. CHOISISSEZ UNE CIBLE PLUS GRANDE.";
 "THE REQUESTED SIZE CANNOT BE REACHED WITH THIS FORMAT. CHOOSE A LARGER TARGET SIZE OR A SMALLER VIDEO RESOLUTION." = "LA TAILLE DEMANDÉE NE PEUT PAS ÊTRE ATTEINTE AVEC CE FORMAT. CHOISISSEZ UNE TAILLE CIBLE PLUS GRANDE OU UNE RÉSOLUTION VIDÉO PLUS PETITE.";
 "THE REQUESTED SIZE IS TOO SMALL FOR A MEDIA CONTAINER. CHOOSE AT LEAST 2 KB." = "LA TAILLE DEMANDÉE EST TROP PETITE POUR UN CONTENEUR MULTIMÉDIA. CHOISISSEZ AU MOINS 2 KO.";
+"THE RESULT IS SAVED AS A TRANSPARENT PNG. YOUR ORIGINAL STAYS UNCHANGED." = "LE RÉSULTAT EST ENREGISTRÉ EN PNG TRANSPARENT. L’ORIGINAL RESTE INCHANGÉ.";
 "THE SAME CONVERSION AND TOOL CATALOG AS MACOS." = "LE MÊME CATALOGUE DE CONVERSIONS ET D’OUTILS QUE SUR MACOS.";
 "THE SELECTED RECTANGLE MUST BE INSIDE THE VIDEO AND AT LEAST 2 × 2 PIXELS." = "LE RECTANGLE SÉLECTIONNÉ DOIT SE TROUVER À L’INTÉRIEUR DE LA VIDÉO ET MESURER AU MOINS 2 × 2 PIXELS.";
 "THE SIGNED PACKAGE VERSION DOES NOT MATCH THIS UPDATE." = "LA VERSION DU PAQUET SIGNÉ NE CORRESPOND PAS À CETTE MISE À JOUR.";
@@ -2469,6 +2482,7 @@
 "THUMBNAIL" = "MINIATURE";
 "TIMES (SECONDS)" = "DURÉES (SECONDES)";
 "TINT" = "NUANCE";
+"TOLERANCE" = "TOLÉRANCE";
 "TOO MANY FILES ALREADY USE THIS NAME." = "TROP DE FICHIERS PORTENT DÉJÀ CE NOM.";
 "TOO MANY IMAGE REDIRECTS." = "TROP DE REDIRECTIONS D’IMAGE.";
 "TOO MANY UPDATE FILES." = "TROP DE FICHIERS DE MISE À JOUR.";
@@ -2567,6 +2581,7 @@
 "The requested image size could not be reached. Choose a larger target." = "La taille d’image demandée n’a pas pu être atteinte. Choisissez une cible plus grande.";
 "The requested size cannot be reached with this format. Choose a larger target size or a smaller video resolution." = "La taille demandée ne peut pas être atteinte avec ce format. Choisissez une taille cible plus grande ou une résolution vidéo plus petite.";
 "The requested size is too small for a media container. Choose at least 2 KB." = "La taille demandée est trop petite pour un conteneur multimédia. Choisissez au moins 2 Ko.";
+"The result is saved as a transparent PNG. Your original stays unchanged." = "Le résultat est enregistré en PNG transparent. L’original reste inchangé.";
 "The same conversion and tool catalog as macOS." = "Le même catalogue de conversions et d’outils que sur macOS.";
 "The selected rectangle must be inside the video and at least 2 × 2 pixels." = "Le rectangle sélectionné doit se trouver à l’intérieur de la vidéo et mesurer au moins 2 × 2 pixels.";
 "The signed package version does not match this update." = "La version du paquet signé ne correspond pas à cette mise à jour.";
@@ -2638,6 +2653,7 @@
 "Thumbnail" = "Miniature";
 "Times (seconds)" = "Durées (secondes)";
 "Tint" = "Nuance";
+"Tolerance" = "Tolérance";
 "Too many files already use this name." = "Trop de fichiers portent déjà ce nom.";
 "Too many image redirects." = "Trop de redirections d’image.";
 "Too many update files." = "Trop de fichiers de mise à jour.";

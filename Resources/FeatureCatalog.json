@@ -376,6 +376,7 @@
       "editImage",
       "annotateImage",
       "frameImage",
+      "removeBackground",
       "cropImage",
       "redactImage"
     ],
@@ -385,6 +386,7 @@
       "editImage",
       "annotateImage",
       "frameImage",
+      "removeBackground",
       "cropImage",
       "redactImage"
     ],
@@ -394,6 +396,7 @@
       "editImage",
       "annotateImage",
       "frameImage",
+      "removeBackground",
       "cropImage",
       "redactImage"
     ],
@@ -403,6 +406,7 @@
       "editImage",
       "annotateImage",
       "frameImage",
+      "removeBackground",
       "cropImage",
       "redactImage"
     ],
@@ -412,6 +416,7 @@
       "editImage",
       "annotateImage",
       "frameImage",
+      "removeBackground",
       "cropImage",
       "redactImage"
     ],
@@ -538,6 +543,7 @@
     "jpg": [
       "compress",
       "removeMetadata",
+      "removeBackground",
       "cropImage",
       "createPDF",
       "createCollage"
@@ -545,6 +551,7 @@
     "png": [
       "compress",
       "removeMetadata",
+      "removeBackground",
       "cropImage",
       "createPDF",
       "createCollage"
@@ -552,6 +559,7 @@
     "webp": [
       "compress",
       "removeMetadata",
+      "removeBackground",
       "cropImage",
       "createPDF",
       "createCollage"
@@ -559,6 +567,7 @@
     "heic": [
       "compress",
       "removeMetadata",
+      "removeBackground",
       "cropImage",
       "createPDF",
       "createCollage"
@@ -566,6 +575,7 @@
     "tiff": [
       "compress",
       "removeMetadata",
+      "removeBackground",
       "cropImage",
       "createPDF",
       "createCollage"
@@ -667,6 +677,7 @@
     "editImage": "Edit Photo",
     "annotateImage": "Annotate Photo",
     "frameImage": "Add BG",
+    "removeBackground": "Remove Background",
     "cropImage": "Crop Image",
     "normalizeAudio": "Normalize Volume",
     "muteVideo": "Remove Audio",

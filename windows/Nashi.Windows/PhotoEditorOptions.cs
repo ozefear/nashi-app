@@ -32,6 +32,12 @@ public sealed partial class ToolEditor
             options.Children.Add(MainWindow.Button("Choose background image…",()=>{var picker=new OpenFileDialog{Filter="Images|*.png;*.jpg;*.webp;*.heic;*.avif;*.tiff;*.bmp"};if(picker.ShowDialog(this)==true){backgroundImage=picker.FileName;backdrop.SelectedItem="image";QueuePhotoPreview();}}));
             Field("Padding",80);Field("Corner radius",24);Field("Shadow radius",24);Field("Shadow opacity",.25);Field("Background blur",0);Field("Image scale",1);Field("Position X",.5);Field("Position Y",.5);Field("Canvas width",(bitmap?.PixelWidth??1000)+160);Field("Canvas height",(bitmap?.PixelHeight??1000)+160);
         }
+        if(tool=="removeBackground")
+        {
+            options.Children.Add(L10n.Label(new TextBlock{Text="Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact.",TextWrapping=TextWrapping.Wrap,Foreground=Theme.Brush("Muted"),Margin=new(4,4,4,8)}));
+            Field("Background tolerance (%)",12);Field("Edge feather (%)",3);
+            options.Children.Add(L10n.Label(new TextBlock{Text="The result is saved as a transparent PNG. Your original stays unchanged.",TextWrapping=TextWrapping.Wrap,Foreground=Theme.Brush("Muted"),Margin=new(4,8,4,4)}));
+        }
         if(tool=="createCollage")
         {
             options.Children.Add(L10n.Label(new TextBlock{Text="Layout"}));options.Children.Add(collageLayout);Field("Columns",2);Field("Canvas width",2048);Field("Canvas height",2048);Field("Spacing",12);Field("Padding",16);Field("Corner radius",0);TextField("Background color","#FFFFFF");
@@ -44,7 +50,7 @@ public sealed partial class ToolEditor
             options.Children.Add(MainWindow.Button("Detect text",async()=>await DetectPhoto(true,false)));options.Children.Add(MainWindow.Button("Detect faces",async()=>await DetectPhoto(false,true)));
             options.Children.Add(MainWindow.Button("Undo area",()=>{if(photoRegions.Count==0)return;photoRegions.RemoveAt(photoRegions.Count-1);if(drawing.Children.Count>1)drawing.Children.RemoveAt(drawing.Children.Count-1);}));
         }
-        if(tool is "editImage" or "frameImage" or "createCollage")
+        if(tool is "editImage" or "frameImage" or "removeBackground" or "createCollage")
         {
             photoPreview=new(){Interval=TimeSpan.FromMilliseconds(300)};photoPreview.Tick+=async(_,_)=>{photoPreview.Stop();await PreviewPhoto();};
             foreach(var box in fields.Values)box.TextChanged+=(_,_)=>QueuePhotoPreview();backdrop.SelectionChanged+=(_,_)=>QueuePhotoPreview();collageLayout.SelectionChanged+=(_,_)=>QueuePhotoPreview();Closed+=(_,_)=>photoPreview.Stop();
@@ -88,7 +94,7 @@ public sealed partial class ToolEditor
     {
         var changes=new Dictionary<string,double>();foreach(var property in typeof(PhotoAdjustments).GetProperties())changes[property.Name]=Value(property.Name,(double)property.GetValue(new PhotoAdjustments())!);
         var adjustments=System.Text.Json.JsonSerializer.Deserialize<PhotoAdjustments>(System.Text.Json.JsonSerializer.Serialize(changes))!;
-        return original with{TargetBytes=Value("Target size (KB; 0 = auto)")>0?(long)(Value("Target size (KB; 0 = auto)")*1024):null,ReductionPercent=Value("Reduction (%; 0 = auto)")>0?Value("Reduction (%; 0 = auto)"):null,FlipHorizontal=flipHorizontal.IsChecked==true,FlipVertical=flipVertical.IsChecked==true,Adjustments=adjustments,Frame=new((int)Value("Padding",80),Value("Corner radius",24),fields.GetValueOrDefault("Background color")?.Text??"#FFFFFF",backdrop.SelectedItem as string??"solid",fields.GetValueOrDefault("Gradient end")?.Text??"#FFD85C",backgroundImage,Value("Background blur"),Value("Shadow radius",24),Value("Shadow opacity",.25),fields.ContainsKey("Canvas width")?(int)Value("Canvas width"):null,fields.ContainsKey("Canvas height")?(int)Value("Canvas height"):null,Value("Image scale",1),Value("Position X",.5),Value("Position Y",.5)),Collage=new(collageLayout.SelectedItem as string??"grid",(int)Value("Columns",2),(int)Value("Canvas width",2048),(int)Value("Canvas height",2048),(int)Value("Spacing",12),(int)Value("Padding",16),Value("Corner radius"),fields.GetValueOrDefault("Background color")?.Text??"#FFFFFF",fitCollage.IsChecked==true,imageOrder.Items.Count>0?imageOrder.Items.Cast<ListBoxItem>().Select(i=>(int)i.Tag).ToArray():null),Redactions=photoRegions.ToArray(),RedactionStyle=redactionStyle.SelectedItem as string??"solid"};
+        return original with{TargetBytes=Value("Target size (KB; 0 = auto)")>0?(long)(Value("Target size (KB; 0 = auto)")*1024):null,ReductionPercent=Value("Reduction (%; 0 = auto)")>0?Value("Reduction (%; 0 = auto)"):null,FlipHorizontal=flipHorizontal.IsChecked==true,FlipVertical=flipVertical.IsChecked==true,Adjustments=adjustments,BackgroundRemovalTolerance=Value("Background tolerance (%)",12)/100,BackgroundRemovalFeather=Value("Edge feather (%)",3)/100,Frame=new((int)Value("Padding",80),Value("Corner radius",24),fields.GetValueOrDefault("Background color")?.Text??"#FFFFFF",backdrop.SelectedItem as string??"solid",fields.GetValueOrDefault("Gradient end")?.Text??"#FFD85C",backgroundImage,Value("Background blur"),Value("Shadow radius",24),Value("Shadow opacity",.25),fields.ContainsKey("Canvas width")?(int)Value("Canvas width"):null,fields.ContainsKey("Canvas height")?(int)Value("Canvas height"):null,Value("Image scale",1),Value("Position X",.5),Value("Position Y",.5)),Collage=new(collageLayout.SelectedItem as string??"grid",(int)Value("Columns",2),(int)Value("Canvas width",2048),(int)Value("Canvas height",2048),(int)Value("Spacing",12),(int)Value("Padding",16),Value("Corner radius"),fields.GetValueOrDefault("Background color")?.Text??"#FFFFFF",fitCollage.IsChecked==true,imageOrder.Items.Count>0?imageOrder.Items.Cast<ListBoxItem>().Select(i=>(int)i.Tag).ToArray():null),Redactions=photoRegions.ToArray(),RedactionStyle=redactionStyle.SelectedItem as string??"solid"};
     }
     private async Task PreviewPhoto()
     {
@@ -99,6 +105,7 @@ public sealed partial class ToolEditor
             var settings=PhotoSettings(new((int)Value("Width",bitmap.PixelWidth),(int)Value("Height",bitmap.PixelHeight),(int)Value("Degrees",0)));BitmapSource result;
             if(tool=="editImage"){var factor=Math.Min(1,1200d/Math.Max(bitmap.PixelWidth,bitmap.PixelHeight));var source=factor<1?new TransformedBitmap(bitmap,new ScaleTransform(factor,factor)):(BitmapSource)bitmap;var png=ImageEngine.PngBytes(source);result=ImageEngine.FromPng(await Task.Run(()=>PhotoCodec.Adjust(png,settings.Adjustments)));result=ImageEngine.TransformPhoto(result,SizeUntouched?settings with{Width=null,Height=null}:settings with{Width=Math.Max(1,(int)Math.Round((settings.Width??bitmap.PixelWidth)*factor)),Height=Math.Max(1,(int)Math.Round((settings.Height??bitmap.PixelHeight)*factor))});}
             else if(tool=="frameImage")result=ImageEngine.Frame(bitmap,settings.Frame);
+            else if(tool=="removeBackground")result=ImageEngine.RemoveBackground(bitmap,settings);
             else result=ImageEngine.Collage(collageInputs,settings.Collage,CancellationToken.None);
             if(!IsVisible||showingOriginal||generation!=photoGeneration)return;SetPhotoPreview(result);
         }

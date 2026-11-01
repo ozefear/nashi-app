@@ -315,7 +315,7 @@ enum NashiApplication {
             state.retainToolWindow(window);window.makeKeyAndOrderFront(nil);NSApp.activate(ignoringOtherApps:true);return
         }
         let view=ToolEditor(state:state,tool:kind)
-        let preview=[ToolKind.editImage,.annotateImage,.cropImage,.frameImage,.redactImage,.createCollage,.cropVideo,.trimVideo,.changeVideoSpeed,.splitVideo,.videoSnapshots,.redactVideo,.trimAudio,.normalizeAudio,.audioChannels,.redactAudio,.audioToVideo].contains(kind)
+        let preview=[ToolKind.editImage,.annotateImage,.cropImage,.frameImage,.removeBackground,.redactImage,.createCollage,.cropVideo,.trimVideo,.changeVideoSpeed,.splitVideo,.videoSnapshots,.redactVideo,.trimAudio,.normalizeAudio,.audioChannels,.redactAudio,.audioToVideo].contains(kind)
         let window=makeToolWindow(title:FeatureCatalog.toolNames[kind] ?? kind.title,size:NSSize(width:preview ? 1000:kind == .organizePDF ? 780:600,height:kind == .compress ? 630:760),view:view)
         state.retainToolWindow(window);window.makeKeyAndOrderFront(nil);NSApp.activate(ignoringOtherApps:true)
     }

@@ -343,6 +343,7 @@
 "BACKGROUND BLUR" = "BACKGROUND BLUR";
 "BACKGROUND COLOR" = "BACKGROUND COLOR";
 "BACKGROUND IMAGE…" = "BACKGROUND IMAGE…";
+"BACKGROUND TOLERANCE (%)" = "BACKGROUND TOLERANCE (%)";
 "BALANCED" = "BALANCED";
 "BARS" = "BARS";
 "BESIDE ORIGINAL FILES" = "BESIDE ORIGINAL FILES";
@@ -363,6 +364,7 @@
 "Background Image…" = "Background Image…";
 "Background blur" = "Background blur";
 "Background color" = "Background color";
+"Background tolerance (%)" = "Background tolerance (%)";
 "Balanced" = "Balanced";
 "Bars" = "Bars";
 "Beside original files" = "Beside original files";
@@ -491,6 +493,7 @@
 "CLEAR" = "CLEAR";
 "CLEAR FLOAT" = "CLEAR FLOAT";
 "CLEAR SELECTION" = "CLEAR SELECTION";
+"CLEAR THE BACKDROP. KEEP THE SUBJECT." = "CLEAR THE BACKDROP. KEEP THE SUBJECT.";
 "CLIPBOARD IS BUSY. TRY AGAIN." = "CLIPBOARD IS BUSY. TRY AGAIN.";
 "CLIPBOARD IS BUSY. TRY PASTE AGAIN." = "CLIPBOARD IS BUSY. TRY PASTE AGAIN.";
 "CLOSE" = "CLOSE";
@@ -689,6 +692,7 @@
 "Clear" = "Clear";
 "Clear Float" = "Clear Float";
 "Clear Selection" = "Clear Selection";
+"Clear the backdrop. Keep the subject." = "Clear the backdrop. Keep the subject.";
 "Clip %@" = "Clip %@";
 "Clip %lld" = "Clip %lld";
 "Clipboard is busy. Try Paste again." = "Clipboard is busy. Try Paste again.";
@@ -976,6 +980,8 @@
 "Drop it like it’s… a file." = "Drop it like it’s… a file.";
 "Drop something good." = "Drop something good.";
 "Duplicate" = "Duplicate";
+"EDGE FEATHER" = "EDGE FEATHER";
+"EDGE FEATHER (%)" = "EDGE FEATHER (%)";
 "EDIT" = "EDIT";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED AUDIO AND VIDEO STAY UNTOUCHED." = "EDIT FIELDS OR REMOVE METADATA. ENCODED AUDIO AND VIDEO STAY UNTOUCHED.";
 "EDIT FIELDS OR REMOVE METADATA. ENCODED IMAGE PIXELS STAY UNTOUCHED." = "EDIT FIELDS OR REMOVE METADATA. ENCODED IMAGE PIXELS STAY UNTOUCHED.";
@@ -1006,6 +1012,8 @@
 "EXPOSURE" = "EXPOSURE";
 "EXTRACT ARCHIVE" = "EXTRACT ARCHIVE";
 "EXTRACT NASHI INTO ITS OWN WRITABLE FOLDER FIRST." = "EXTRACT NASHI INTO ITS OWN WRITABLE FOLDER FIRST.";
+"Edge feather" = "Edge feather";
+"Edge feather (%)" = "Edge feather (%)";
 "Edit" = "Edit";
 "Edit Image" = "Edit Image";
 "Edit Photo" = "Edit Photo";
@@ -1939,6 +1947,7 @@
 "REMOVE SELECTED RANGE" = "REMOVE SELECTED RANGE";
 "REMOVE SILENCE AT THE BEGINNING AND END" = "REMOVE SILENCE AT THE BEGINNING AND END";
 "REMOVE SILENCE FROM BEGINNING AND END" = "REMOVE SILENCE FROM BEGINNING AND END";
+"REMOVES A SOLID OR NEAR-SOLID BACKGROUND CONNECTED TO THE IMAGE EDGE. ENCLOSED MATCHING COLORS STAY INTACT." = "REMOVES A SOLID OR NEAR-SOLID BACKGROUND CONNECTED TO THE IMAGE EDGE. ENCLOSED MATCHING COLORS STAY INTACT.";
 "RENDERED PAGES EXCEED 512 MB. CHOOSE A LOWER DPI OR SPLIT THE PDF FIRST." = "RENDERED PAGES EXCEED 512 MB. CHOOSE A LOWER DPI OR SPLIT THE PDF FIRST.";
 "REPLACE SELECTED AUDIO WITH" = "REPLACE SELECTED AUDIO WITH";
 "REPORT SAVED." = "REPORT SAVED.";
@@ -2012,6 +2021,7 @@
 "Remove selected range" = "Remove selected range";
 "Remove silence at the beginning and end" = "Remove silence at the beginning and end";
 "Remove silence from beginning and end" = "Remove silence from beginning and end";
+"Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact." = "Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact.";
 "Rendered pages exceed 512 MB. Choose a lower DPI or split the PDF first." = "Rendered pages exceed 512 MB. Choose a lower DPI or split the PDF first.";
 "Rendering page %@" = "Rendering page %@";
 "Rendering page %lld" = "Rendering page %lld";
@@ -2070,6 +2080,7 @@
 "SAVE SPEED COPY" = "SAVE SPEED COPY";
 "SAVE THE ARCHIVE OUTSIDE THE FOLDER BEING ZIPPED." = "SAVE THE ARCHIVE OUTSIDE THE FOLDER BEING ZIPPED.";
 "SAVE TO" = "SAVE TO";
+"SAVE TRANSPARENT PNG" = "SAVE TRANSPARENT PNG";
 "SAVE TRIMMED COPY" = "SAVE TRIMMED COPY";
 "SAVE WITH BACKGROUND" = "SAVE WITH BACKGROUND";
 "SAVED 1 NEW FILE. ORIGINALS KEPT." = "SAVED 1 NEW FILE. ORIGINALS KEPT.";
@@ -2221,6 +2232,7 @@
 "Save speed copy" = "Save speed copy";
 "Save the archive outside the folder being zipped." = "Save the archive outside the folder being zipped.";
 "Save to" = "Save to";
+"Save transparent PNG" = "Save transparent PNG";
 "Save trimmed copy" = "Save trimmed copy";
 "Save with background" = "Save with background";
 "Saved %@ new files. Originals kept." = "Saved %@ new files. Originals kept.";
@@ -2404,6 +2416,7 @@
 "THE REQUESTED PDF SIZE COULD NOT BE REACHED. CHOOSE A LARGER TARGET." = "THE REQUESTED PDF SIZE COULD NOT BE REACHED. CHOOSE A LARGER TARGET.";
 "THE REQUESTED SIZE CANNOT BE REACHED WITH THIS FORMAT. CHOOSE A LARGER TARGET SIZE OR A SMALLER VIDEO RESOLUTION." = "THE REQUESTED SIZE CANNOT BE REACHED WITH THIS FORMAT. CHOOSE A LARGER TARGET SIZE OR A SMALLER VIDEO RESOLUTION.";
 "THE REQUESTED SIZE IS TOO SMALL FOR A MEDIA CONTAINER. CHOOSE AT LEAST 2 KB." = "THE REQUESTED SIZE IS TOO SMALL FOR A MEDIA CONTAINER. CHOOSE AT LEAST 2 KB.";
+"THE RESULT IS SAVED AS A TRANSPARENT PNG. YOUR ORIGINAL STAYS UNCHANGED." = "THE RESULT IS SAVED AS A TRANSPARENT PNG. YOUR ORIGINAL STAYS UNCHANGED.";
 "THE SAME CONVERSION AND TOOL CATALOG AS MACOS." = "THE SAME CONVERSION AND TOOL CATALOG AS MACOS.";
 "THE SELECTED RECTANGLE MUST BE INSIDE THE VIDEO AND AT LEAST 2 × 2 PIXELS." = "THE SELECTED RECTANGLE MUST BE INSIDE THE VIDEO AND AT LEAST 2 × 2 PIXELS.";
 "THE SIGNED PACKAGE VERSION DOES NOT MATCH THIS UPDATE." = "THE SIGNED PACKAGE VERSION DOES NOT MATCH THIS UPDATE.";
@@ -2469,6 +2482,7 @@
 "THUMBNAIL" = "THUMBNAIL";
 "TIMES (SECONDS)" = "TIMES (SECONDS)";
 "TINT" = "TINT";
+"TOLERANCE" = "TOLERANCE";
 "TOO MANY FILES ALREADY USE THIS NAME." = "TOO MANY FILES ALREADY USE THIS NAME.";
 "TOO MANY IMAGE REDIRECTS." = "TOO MANY IMAGE REDIRECTS.";
 "TOO MANY UPDATE FILES." = "TOO MANY UPDATE FILES.";
@@ -2567,6 +2581,7 @@
 "The requested image size could not be reached. Choose a larger target." = "The requested image size could not be reached. Choose a larger target.";
 "The requested size cannot be reached with this format. Choose a larger target size or a smaller video resolution." = "The requested size cannot be reached with this format. Choose a larger target size or a smaller video resolution.";
 "The requested size is too small for a media container. Choose at least 2 KB." = "The requested size is too small for a media container. Choose at least 2 KB.";
+"The result is saved as a transparent PNG. Your original stays unchanged." = "The result is saved as a transparent PNG. Your original stays unchanged.";
 "The same conversion and tool catalog as macOS." = "The same conversion and tool catalog as macOS.";
 "The selected rectangle must be inside the video and at least 2 × 2 pixels." = "The selected rectangle must be inside the video and at least 2 × 2 pixels.";
 "The signed package version does not match this update." = "The signed package version does not match this update.";
@@ -2638,6 +2653,7 @@
 "Thumbnail" = "Thumbnail";
 "Times (seconds)" = "Times (seconds)";
 "Tint" = "Tint";
+"Tolerance" = "Tolerance";
 "Too many files already use this name." = "Too many files already use this name.";
 "Too many image redirects." = "Too many image redirects.";
 "Too many update files." = "Too many update files.";

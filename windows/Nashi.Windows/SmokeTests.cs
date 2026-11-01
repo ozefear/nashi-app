@@ -55,6 +55,15 @@ internal static class SmokeTests
         var crop=ImageEngine.Apply("crop",[source],root,new(Crop:new Int32Rect(10,10,80,60)));Check(ImageEngine.Load(crop[0]).PixelWidth==80,"Crop width mismatch");
         var resized=ImageEngine.Apply("resize",[source],root,new(Width:160));Check(ImageEngine.Load(resized[0]).PixelHeight==90,"Resize aspect mismatch");
         var rotated=ImageEngine.Apply("rotate",[source],root,new(Rotation:90));Check(ImageEngine.Load(rotated[0]).PixelWidth==180,"Rotate mismatch");
+        var backgroundPixels=Enumerable.Repeat(new byte[]{255,255,255,255},49).SelectMany(value=>value).ToArray();
+        for(var y=2;y<=4;y++)for(var x=2;x<=4;x++){var offset=(y*7+x)*4;backgroundPixels[offset]=0;backgroundPixels[offset+1]=0;backgroundPixels[offset+2]=255;}
+        var enclosed=(3*7+3)*4;backgroundPixels[enclosed]=backgroundPixels[enclosed+1]=backgroundPixels[enclosed+2]=255;
+        var backgroundFixture=Path.Combine(root,"Background fixture.png");ImageEngine.Save(BitmapSource.Create(7,7,96,96,PixelFormats.Bgra32,null,backgroundPixels,28),backgroundFixture,"png");var originalBackground=System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(backgroundFixture));
+        var removed=ImageEngine.Apply("removeBackground",[backgroundFixture],root,new())[0];var removedPixels=new byte[7*7*4];new FormatConvertedBitmap(ImageEngine.Load(removed),PixelFormats.Bgra32,null,0).CopyPixels(removedPixels,28,0);
+        Check(removedPixels[3]==0&&removedPixels[(2*7+2)*4+3]==255&&removedPixels[enclosed+3]==255,"Background removal did not preserve the edge-connected boundary");
+        Check(Path.GetExtension(removed).Equals(".png",StringComparison.OrdinalIgnoreCase)&&Path.GetFileName(removed).Contains("No Background")&&originalBackground.SequenceEqual(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(backgroundFixture))),"Background removal changed its source or output contract");
+        var removedAgain=ImageEngine.Apply("removeBackground",[backgroundFixture],root,new())[0];Check(removedAgain!=removed,"Background removal overwrote an existing output");
+        using(var cancelled=new CancellationTokenSource()){cancelled.Cancel();try{ImageEngine.RemoveBackground(ImageEngine.Load(backgroundFixture),new(),cancelled.Token);Check(false,"Background removal ignored cancellation");}catch(OperationCanceledException){Check(true,"Background removal honours cancellation");}}
         foreach(var ext in ImageEngine.Formats){var converted=ImageEngine.Apply("convert",[source],root,new(){EncoderPath=testTools.Ready?testTools.Executable("ffmpeg"):null},ext);Check(new FileInfo(converted[0]).Length>0,"Empty "+ext);}
         var pdfs=Directory.GetFiles(root,"*.pdf");var merged=DocumentEngine.Pdf("mergePDFs",[pdfs[0],pdfs[0]],root);var parts=DocumentEngine.Pdf("splitPDF",merged,root);Check(parts.Count==2,"PDF page count mismatch");
         var zip=DocumentEngine.Zip([source],root);var extracted=DocumentEngine.Unzip(zip,root);Check(File.Exists(Path.Combine(extracted[0],"Source.png")),"ZIP output missing");

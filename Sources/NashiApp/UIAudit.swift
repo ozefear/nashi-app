@@ -5,7 +5,7 @@ import NashiCore
 import NashiUpdates
 
 struct UIAuditOptions {
-    static let scenes=["home.empty","home.selected","library","settings.general","settings.formats","settings.updates","wheel.pdf-multiple","editor.crop-image","editor.annotate-image","editor.frame-image"]
+    static let scenes=["home.empty","home.selected","library","settings.general","settings.formats","settings.updates","wheel.pdf-multiple","editor.crop-image","editor.annotate-image","editor.frame-image","editor.remove-background"]
     var output:URL
     var scenes=Self.scenes
     var appearances=["light","dark"]
@@ -136,8 +136,8 @@ struct UIAuditError:LocalizedError { let message:String;init(_ message:String){s
         case "settings.general","settings.formats","settings.updates":
             let section:SettingsSection=scene=="settings.formats" ? .formats:scene=="settings.updates" ? .updates:.general
             view=AnyView(SettingsView(updater:updater,initialSection:section));size=NSSize(width:790,height:590)
-        case "editor.crop-image","editor.annotate-image","editor.frame-image":
-            let tool:ToolKind=scene=="editor.crop-image" ? .cropImage:scene=="editor.annotate-image" ? .annotateImage:.frameImage
+        case "editor.crop-image","editor.annotate-image","editor.frame-image","editor.remove-background":
+            let tool:ToolKind=scene=="editor.crop-image" ? .cropImage:scene=="editor.annotate-image" ? .annotateImage:scene=="editor.frame-image" ? .frameImage:.removeBackground
             view=AnyView(ToolEditor(state:state,tool:tool));size=NSSize(width:900,height:420)
         case "wheel.pdf-multiple":
             let wheel=WheelView(frame:NSRect(x:0,y:0,width:320,height:320));let inputs=[fixtures["pdf1"]!,fixtures["pdf2"]!]

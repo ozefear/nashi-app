@@ -1,6 +1,6 @@
 # Mac and Windows desktop parity
 
-Both implementations use the same 46 input-format / 27-tool catalog. `scripts/check-feature-parity.py` checks conversion destinations, tool names and single/multi-file eligibility against the Swift source; it is not a substitute for running the tools.
+Both implementations use the same 46 input-format / 28-tool catalog. `scripts/check-feature-parity.py` checks conversion destinations, tool names and single/multi-file eligibility against the Swift source; it is not a substitute for running the tools.
 
 | Workflow | Shared behavior |
 | --- | --- |

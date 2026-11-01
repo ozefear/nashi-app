@@ -34,7 +34,7 @@ public enum FileCategory: String, Codable, CaseIterable, Sendable {
 }
 
 public enum ToolKind: String, Codable, CaseIterable, Sendable {
-    case compress, removeMetadata, editImage, annotateImage, frameImage, cropImage
+    case compress, removeMetadata, editImage, annotateImage, frameImage, removeBackground, cropImage
     case normalizeAudio, muteVideo, trimVideo, splitPDF, organizePDF, extractArchive
     case createPDF, mergePDF, cropVideo, changeVideoSpeed, joinVideos, videoSnapshots
     case splitVideo, audioToVideo, trimAudio, audioChannels, createCollage
@@ -46,6 +46,7 @@ public enum ToolKind: String, Codable, CaseIterable, Sendable {
         case .editImage: return "Edit Image"
         case .annotateImage: return "Annotate"
         case .frameImage: return "Frame Image"
+        case .removeBackground: return "Remove Background"
         case .cropImage: return "Crop Image"
         case .normalizeAudio: return "Normalize Audio"
         case .muteVideo: return "Mute Video"
@@ -151,6 +152,8 @@ public struct OperationOptions: Codable, Sendable {
     public var annotations: [Annotation] = []
     public var imageAdjustments: ImageAdjustments = .init()
     public var imageFrame: ImageFrameOptions? = nil
+    public var backgroundRemovalTolerance: Double = 0.12
+    public var backgroundRemovalFeather: Double = 0.03
     public var collage: CollageOptions? = nil
     public var imageAnnotations: [ImageAnnotation] = []
     public var imageRedaction: ImageRedactionOptions? = nil

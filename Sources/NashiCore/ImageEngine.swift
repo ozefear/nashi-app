@@ -111,10 +111,11 @@ public enum ImageEngine {
                 case .annotateImage: image=try annotate(image,options:options); suffix=" - Annotated"
                 case .redactImage: image=try redact(image,options:options); suffix=" - Redacted"
                 case .frameImage: image=try frame(image,options:options); suffix=" - Framed"
+                case .removeBackground: image=try removeBackground(image,options:options,token:token); suffix=" - No Background"
                 default: throw NashiError.unsupported("\(kind.title) is not an image operation.")
                 }
-                let output=OutputFiles.unique(for:input,extension:kind == .annotateImage ? "png" : ext,suffix:suffix,directory:options.outputDirectory)
-                try write(image,to:output,quality:options.quality)
+                let output=OutputFiles.unique(for:input,extension:kind == .annotateImage || kind == .removeBackground ? "png" : ext,suffix:suffix,directory:options.outputDirectory)
+                try write(image,to:output,quality:options.quality,token:token)
                 outputs.append(output)
             } catch NashiError.invalidInput(let message) where kind == .cropImage || kind == .redactImage {
                 throw NashiError.invalidInput("\(input.lastPathComponent): \(message)")
@@ -141,6 +142,7 @@ public enum ImageEngine {
         case .annotateImage: return try annotate(image,options:options)
         case .redactImage: return try redact(image,options:options)
         case .frameImage: return try frame(image,options:options)
+        case .removeBackground: return try removeBackground(image,options:options,token:.init())
         case .cropImage:
             guard let crop=options.crop else { throw NashiError.invalidInput("Choose a crop rectangle.") }
             guard [crop.x,crop.y,crop.width,crop.height].allSatisfy(\.isFinite) else { throw NashiError.invalidInput("Crop coordinates must be finite.") }
@@ -155,6 +157,63 @@ public enum ImageEngine {
             guard let result=image.cropping(to:r) else { throw NashiError.invalidInput("The crop rectangle could not be read from the image.") }
             return try resizeUsingOptions(result,options:options)
         default: throw NashiError.unsupported("\(tool.title) does not have a single-image preview.")
+        }
+    }
+
+    /// Removes a near-solid background that is connected to an image edge.
+    /// Matching enclosed pixels are deliberately retained as part of the subject.
+    public static func removeBackground(_ image:CGImage,options:OperationOptions,token:CancellationToken) throws -> CGImage {
+        let tolerance=options.backgroundRemovalTolerance,feather=options.backgroundRemovalFeather
+        guard tolerance.isFinite,feather.isFinite,(0...1).contains(tolerance),(0...1).contains(feather) else { throw NashiError.invalidInput("Background tolerance and feather must be between 0 and 1.") }
+        let width=image.width,height=image.height,stride=width*4,count=width*height
+        guard count>0,count<=100_000_000 else { throw NashiError.invalidInput("This image is too large (100 MP limit).") }
+        var pixels=[UInt8](repeating:0,count:stride*height)
+        let rendered=pixels.withUnsafeMutableBytes { bytes -> Bool in
+            guard let context=CGContext(data:bytes.baseAddress,width:width,height:height,bitsPerComponent:8,bytesPerRow:stride,space:imageColorSpace,bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue) else { return false }
+            context.draw(image,in:CGRect(x:0,y:0,width:width,height:height));return true
+        }
+        guard rendered else { throw NashiError.failed("Could not read image pixels.") }
+        func color(_ index:Int)->(Double,Double,Double) {
+            let offset=index*4,alpha=Double(pixels[offset+3])
+            guard alpha>0 else { return (0,0,0) }
+            let scale=255/alpha
+            return (min(255,Double(pixels[offset])*scale),min(255,Double(pixels[offset+1])*scale),min(255,Double(pixels[offset+2])*scale))
+        }
+        func distance(_ lhs:(Double,Double,Double),_ rhs:(Double,Double,Double))->Double {
+            let dr=lhs.0-rhs.0,dg=lhs.1-rhs.1,db=lhs.2-rhs.2
+            return sqrt((dr*dr+dg*dg+db*db)/(3*255*255))
+        }
+        let corners=[0,width-1,(height-1)*width,(height-1)*width+width-1]
+        let samples=corners.map(color),clusterLimit=max(0.03,min(0.15,tolerance*0.5))
+        let anchor=(0..<samples.count).max { a,b in
+            samples.filter{distance(samples[a],$0)<=clusterLimit}.count < samples.filter{distance(samples[b],$0)<=clusterLimit}.count
+        }!
+        let cluster=samples.filter{distance(samples[anchor],$0)<=clusterLimit}
+        guard cluster.count>=2 else { throw NashiError.invalidInput("A solid edge background could not be detected. Try an image with matching background in at least two corners.") }
+        let reference=cluster.reduce((0.0,0.0,0.0)){($0.0+$1.0,$0.1+$1.1,$0.2+$1.2)}
+        let background=(reference.0/Double(cluster.count),reference.1/Double(cluster.count),reference.2/Double(cluster.count))
+        let limit=min(1,tolerance+feather),seedIndices=(0..<width).flatMap{[$0,(height-1)*width+$0]} + (0..<height).flatMap{[$0*width,$0*width+width-1]}
+        var visited=[Bool](repeating:false,count:count),queue=[Int]();queue.reserveCapacity(min(count,width*2+height*2))
+        for index in seedIndices where !visited[index] && distance(color(index),background)<=limit { visited[index]=true;queue.append(index) }
+        guard !queue.isEmpty else { throw NashiError.invalidInput("A solid edge background could not be detected.") }
+        var cursor=0
+        while cursor<queue.count {
+            if cursor & 4095 == 0 { try token.check() }
+            let index=queue[cursor];cursor+=1;let x=index%width,y=index/width
+            for neighbor in [x>0 ? index-1:nil,x+1<width ? index+1:nil,y>0 ? index-width:nil,y+1<height ? index+width:nil].compactMap({$0}) where !visited[neighbor] {
+                if distance(color(neighbor),background)<=limit { visited[neighbor]=true;queue.append(neighbor) }
+            }
+        }
+        for index in queue {
+            let d=distance(color(index),background)
+            let keep=feather>0 ? max(0,min(1,(d-tolerance)/feather)) : 0
+            let offset=index*4
+            for channel in 0..<4 { pixels[offset+channel]=UInt8((Double(pixels[offset+channel])*keep).rounded()) }
+        }
+        try token.check()
+        return try pixels.withUnsafeMutableBytes { bytes in
+            guard let context=CGContext(data:bytes.baseAddress,width:width,height:height,bitsPerComponent:8,bytesPerRow:stride,space:imageColorSpace,bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue),let result=context.makeImage() else { throw NashiError.failed("Could not create transparent image.") }
+            return result
         }
     }
 

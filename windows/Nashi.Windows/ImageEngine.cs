@@ -15,6 +15,7 @@ public sealed record ImageOptions(int? Width=null,int? Height=null,int Rotation=
     // Size presets apply to each image's own dimensions rather than the first image's.
     public double? Scale{get;init;}public int? LongestEdge{get;init;}
     public string? EncoderPath{get;init;}
+    public double BackgroundRemovalTolerance{get;init;}=.12;public double BackgroundRemovalFeather{get;init;}=.03;
 }
 public static partial class ImageEngine
 {
@@ -73,6 +74,7 @@ public static partial class ImageEngine
                     image=FromPng(PhotoCodec.Adjust(PngBytes(image),options.Adjustments));
                     image=TransformPhoto(image,options);break;
                 case "frameImage":image=Frame(image,options.Frame);ext="png";break;
+                case "removeBackground":image=RemoveBackground(image,options,token);ext="png";break;
                 // Like macOS, keep the source format: redacted pixels are replaced before encoding, and a
                 // 48 MP JPEG re-saved as PNG took ~5-10 s and grew from 8 MB to 52 MB. Writing HEIC needs the
                 // media tools on Windows, so without them a HEIC source keeps the previous PNG output.
@@ -81,7 +83,8 @@ public static partial class ImageEngine
                 default:throw new ArgumentException("Unsupported image tool.");
             }
             if(tool=="compress"&&!new[]{"jpg","png","heic","webp","avif"}.Contains(ext))ext="jpg";
-            var output=SafePaths.Unique(tx.StagingDirectory,Path.GetFileNameWithoutExtension(input)+(tool=="convert"?"":" "+tool)+"."+ext);
+            var suffix=tool=="convert"?"":tool=="removeBackground"?" - No Background":" "+tool;
+            var output=SafePaths.Unique(tx.StagingDirectory,Path.GetFileNameWithoutExtension(input)+suffix+"."+ext);
             if(tool=="compress")CompressImage(image,input,output,ext,options,token,progress);else Save(image,output,ext,options.Quality,options.EncoderPath,token);outputs.Add(output);progress?.Report(new(++completed/(double)inputs.Count*.98,"Saving images…"));
         }
         return tx.Publish(outputs,token);
@@ -102,6 +105,32 @@ public static partial class ImageEngine
         var factor=options.Scale??(options.LongestEdge is {} edge?(double?)Math.Min(1,(double)edge/Math.Max(w,h)):null);
         if(factor is {} f)return(Math.Max(1,(int)Math.Round(w*f)),Math.Max(1,(int)Math.Round(h*f)));
         return(options.Width,options.Height) switch{({} width,{} height)=>(width,height),({} width,null)=>(width,Math.Max(1,(int)Math.Round(h*(double)width/w))),(null,{} height)=>(Math.Max(1,(int)Math.Round(w*(double)height/h)),height),_=>(w,h)};
+    }
+    /// Removes only near-solid background pixels connected to an image edge.
+    /// Matching enclosed pixels stay untouched, which protects details inside the subject.
+    internal static BitmapSource RemoveBackground(BitmapSource image,ImageOptions options,CancellationToken token=default)
+    {
+        var tolerance=options.BackgroundRemovalTolerance;var feather=options.BackgroundRemovalFeather;
+        if(!double.IsFinite(tolerance)||!double.IsFinite(feather)||tolerance is <0 or >1||feather is <0 or >1)throw new ArgumentException("Background tolerance and feather must be between 0 and 100%.");
+        var source=image.Format==PixelFormats.Bgra32?image:new FormatConvertedBitmap(image,PixelFormats.Bgra32,null,0);
+        var width=source.PixelWidth;var height=source.PixelHeight;var count=checked(width*height);var stride=checked(width*4);var pixels=new byte[checked(stride*height)];source.CopyPixels(pixels,stride,0);
+        (double R,double G,double B) Color(int index){var offset=index*4;return(pixels[offset+2],pixels[offset+1],pixels[offset]);}
+        static double Distance((double R,double G,double B) a,(double R,double G,double B) b){var r=a.R-b.R;var g=a.G-b.G;var blue=a.B-b.B;return Math.Sqrt((r*r+g*g+blue*blue)/(3*255*255));}
+        var corners=new[]{0,width-1,(height-1)*width,count-1};var samples=corners.Select(Color).ToArray();var clusterLimit=Math.Max(.03,Math.Min(.15,tolerance*.5));
+        var anchor=Enumerable.Range(0,4).MaxBy(index=>samples.Count(sample=>Distance(samples[index],sample)<=clusterLimit));var cluster=samples.Where(sample=>Distance(samples[anchor],sample)<=clusterLimit).ToArray();
+        if(cluster.Length<2)throw new ArgumentException("A solid edge background could not be detected. Try an image with matching background in at least two corners.");
+        var background=(cluster.Average(c=>c.R),cluster.Average(c=>c.G),cluster.Average(c=>c.B));var limit=Math.Min(1,tolerance+feather);var visited=new bool[count];var queue=new List<int>(Math.Min(count,width*2+height*2));
+        void Seed(int index){if(!visited[index]&&Distance(Color(index),background)<=limit){visited[index]=true;queue.Add(index);}}
+        for(var x=0;x<width;x++){Seed(x);Seed((height-1)*width+x);}for(var y=0;y<height;y++){Seed(y*width);Seed(y*width+width-1);}
+        if(queue.Count==0)throw new ArgumentException("A solid edge background could not be detected.");
+        for(var cursor=0;cursor<queue.Count;cursor++)
+        {
+            if((cursor&4095)==0)token.ThrowIfCancellationRequested();var index=queue[cursor];var x=index%width;var y=index/width;
+            if(x>0)Visit(index-1);if(x+1<width)Visit(index+1);if(y>0)Visit(index-width);if(y+1<height)Visit(index+width);
+            void Visit(int neighbor){if(!visited[neighbor]&&Distance(Color(neighbor),background)<=limit){visited[neighbor]=true;queue.Add(neighbor);}}
+        }
+        foreach(var index in queue){var distance=Distance(Color(index),background);var keep=feather>0?Math.Clamp((distance-tolerance)/feather,0,1):0;pixels[index*4+3]=(byte)Math.Round(pixels[index*4+3]*keep);}
+        token.ThrowIfCancellationRequested();var result=BitmapSource.Create(width,height,image.DpiX,image.DpiY,PixelFormats.Bgra32,null,pixels,stride);result.Freeze();return result;
     }
     // TransformedBitmap only accepts quarter turns. Other angles are drawn clockwise
     // onto a transparent canvas large enough for the turned corners.
