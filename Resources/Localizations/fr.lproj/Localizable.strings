@@ -1460,6 +1460,7 @@
 "METADATA TOOLS CHECKSUM MISMATCH." = "SOMME DE CONTRÔLE DES OUTILS DE MÉTADONNÉES INCORRECTE.";
 "METADATA · NASHI" = "MÉTADONNÉES · NASHI";
 "MIDDLE THIRD" = "TIERS CENTRAL";
+"MODE" = "MODE";
 "MONO" = "MONO";
 "MONOSPACED" = "MONOCHASSE";
 "MOVE" = "DÉPLACER";
@@ -1507,6 +1508,7 @@
 "Metadata tools checksum mismatch." = "Somme de contrôle des outils de métadonnées incorrecte.";
 "Metadata · Nashi" = "Métadonnées · Nashi";
 "Middle third" = "Tiers central";
+"Mode" = "Mode";
 "Mono" = "Mono";
 "Monospaced" = "Monochasse";
 "Move" = "Déplacer";
@@ -2154,7 +2156,13 @@
 "SMALLER FILES WITH LESS QUALITY LOSS." = "DES FICHIERS PLUS LÉGERS AVEC MOINS DE PERTE DE QUALITÉ.";
 "SMALLER FILES WITH STRONGER COMPRESSION." = "DES FICHIERS PLUS LÉGERS AVEC UNE COMPRESSION PLUS FORTE.";
 "SMALLEST" = "LE PLUS PETIT";
+"SMART" = "INTELLIGENT";
+"SMART BACKGROUND REMOVAL" = "SUPPRESSION INTELLIGENTE DE L’ARRIÈRE-PLAN";
+"SMART BACKGROUND REMOVAL NEEDS A ONE-TIME 4.4 MB LOCAL MODEL DOWNLOAD. IMAGES ARE NEVER UPLOADED. DOWNLOAD IT NOW?" = "LA SUPPRESSION INTELLIGENTE NÉCESSITE UN TÉLÉCHARGEMENT UNIQUE DE 4,4 MO. LES IMAGES NE SONT JAMAIS ENVOYÉES. LE TÉLÉCHARGER MAINTENANT ?";
+"SMART RUNS A LOCAL MODEL FOR PEOPLE AND OBJECTS. SOLID COLOR IS FASTER FOR SIMPLE STUDIO BACKGROUNDS." = "LE MODE INTELLIGENT EXÉCUTE UN MODÈLE LOCAL POUR LES PERSONNES ET LES OBJETS. LA COULEUR UNIE EST PLUS RAPIDE POUR LES FONDS DE STUDIO SIMPLES.";
+"SMART USES THE LOCAL SYSTEM MODEL TO FIND PEOPLE AND OBJECTS. IMAGES ARE NEVER UPLOADED." = "LE MODE INTELLIGENT UTILISE LE MODÈLE SYSTÈME LOCAL POUR DÉTECTER LES PERSONNES ET LES OBJETS. LES IMAGES NE SONT JAMAIS ENVOYÉES.";
 "SOLID" = "PLEIN";
+"SOLID COLOR" = "COULEUR UNIE";
 "SOUND AND HAPTIC FEEDBACK" = "RETOUR SONORE ET HAPTIQUE";
 "SOUND FEEDBACK" = "RETOUR SONORE";
 "SOUND FOLLOWS YOUR MAC’S VOLUME. HAPTICS NEED A COMPATIBLE FORCE TOUCH TRACKPAD." = "LE SON SUIT LE VOLUME DE VOTRE MAC. LE RETOUR HAPTIQUE NÉCESSITE UN TRACKPAD FORCE TOUCH COMPATIBLE.";
@@ -2325,7 +2333,13 @@
 "Smaller files with less quality loss." = "Des fichiers plus légers avec moins de perte de qualité.";
 "Smaller files with stronger compression." = "Des fichiers plus légers avec une compression plus forte.";
 "Smallest" = "Le plus petit";
+"Smart" = "Intelligent";
+"Smart background removal" = "Suppression intelligente de l’arrière-plan";
+"Smart background removal needs a one-time 4.4 MB local model download. Images are never uploaded. Download it now?" = "La suppression intelligente nécessite un téléchargement unique de 4,4 Mo. Les images ne sont jamais envoyées. Le télécharger maintenant ?";
+"Smart runs a local model for people and objects. Solid color is faster for simple studio backgrounds." = "Le mode intelligent exécute un modèle local pour les personnes et les objets. La couleur unie est plus rapide pour les fonds de studio simples.";
+"Smart uses the local system model to find people and objects. Images are never uploaded." = "Le mode intelligent utilise le modèle système local pour détecter les personnes et les objets. Les images ne sont jamais envoyées.";
 "Solid" = "Plein";
+"Solid color" = "Couleur unie";
 "Sound and haptic feedback" = "Retour sonore et haptique";
 "Sound feedback" = "Retour sonore";
 "Sound follows your Mac’s volume. Haptics need a compatible Force Touch trackpad." = "Le son suit le volume de votre Mac. Le retour haptique nécessite un trackpad Force Touch compatible.";

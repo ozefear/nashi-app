@@ -1460,6 +1460,7 @@
 "METADATA TOOLS CHECKSUM MISMATCH." = "METADATA TOOLS CHECKSUM MISMATCH.";
 "METADATA · NASHI" = "METADATA · NASHI";
 "MIDDLE THIRD" = "MIDDLE THIRD";
+"MODE" = "MODE";
 "MONO" = "MONO";
 "MONOSPACED" = "MONOSPACED";
 "MOVE" = "MOVE";
@@ -1507,6 +1508,7 @@
 "Metadata tools checksum mismatch." = "Metadata tools checksum mismatch.";
 "Metadata · Nashi" = "Metadata · Nashi";
 "Middle third" = "Middle third";
+"Mode" = "Mode";
 "Mono" = "Mono";
 "Monospaced" = "Monospaced";
 "Move" = "Move";
@@ -2154,7 +2156,13 @@
 "SMALLER FILES WITH LESS QUALITY LOSS." = "SMALLER FILES WITH LESS QUALITY LOSS.";
 "SMALLER FILES WITH STRONGER COMPRESSION." = "SMALLER FILES WITH STRONGER COMPRESSION.";
 "SMALLEST" = "SMALLEST";
+"SMART" = "SMART";
+"SMART BACKGROUND REMOVAL" = "SMART BACKGROUND REMOVAL";
+"SMART BACKGROUND REMOVAL NEEDS A ONE-TIME 4.4 MB LOCAL MODEL DOWNLOAD. IMAGES ARE NEVER UPLOADED. DOWNLOAD IT NOW?" = "SMART BACKGROUND REMOVAL NEEDS A ONE-TIME 4.4 MB LOCAL MODEL DOWNLOAD. IMAGES ARE NEVER UPLOADED. DOWNLOAD IT NOW?";
+"SMART RUNS A LOCAL MODEL FOR PEOPLE AND OBJECTS. SOLID COLOR IS FASTER FOR SIMPLE STUDIO BACKGROUNDS." = "SMART RUNS A LOCAL MODEL FOR PEOPLE AND OBJECTS. SOLID COLOR IS FASTER FOR SIMPLE STUDIO BACKGROUNDS.";
+"SMART USES THE LOCAL SYSTEM MODEL TO FIND PEOPLE AND OBJECTS. IMAGES ARE NEVER UPLOADED." = "SMART USES THE LOCAL SYSTEM MODEL TO FIND PEOPLE AND OBJECTS. IMAGES ARE NEVER UPLOADED.";
 "SOLID" = "SOLID";
+"SOLID COLOR" = "SOLID COLOR";
 "SOUND AND HAPTIC FEEDBACK" = "SOUND AND HAPTIC FEEDBACK";
 "SOUND FEEDBACK" = "SOUND FEEDBACK";
 "SOUND FOLLOWS YOUR MAC’S VOLUME. HAPTICS NEED A COMPATIBLE FORCE TOUCH TRACKPAD." = "SOUND FOLLOWS YOUR MAC’S VOLUME. HAPTICS NEED A COMPATIBLE FORCE TOUCH TRACKPAD.";
@@ -2325,7 +2333,13 @@
 "Smaller files with less quality loss." = "Smaller files with less quality loss.";
 "Smaller files with stronger compression." = "Smaller files with stronger compression.";
 "Smallest" = "Smallest";
+"Smart" = "Smart";
+"Smart background removal" = "Smart background removal";
+"Smart background removal needs a one-time 4.4 MB local model download. Images are never uploaded. Download it now?" = "Smart background removal needs a one-time 4.4 MB local model download. Images are never uploaded. Download it now?";
+"Smart runs a local model for people and objects. Solid color is faster for simple studio backgrounds." = "Smart runs a local model for people and objects. Solid color is faster for simple studio backgrounds.";
+"Smart uses the local system model to find people and objects. Images are never uploaded." = "Smart uses the local system model to find people and objects. Images are never uploaded.";
 "Solid" = "Solid";
+"Solid color" = "Solid color";
 "Sound and haptic feedback" = "Sound and haptic feedback";
 "Sound feedback" = "Sound feedback";
 "Sound follows your Mac’s volume. Haptics need a compatible Force Touch trackpad." = "Sound follows your Mac’s volume. Haptics need a compatible Force Touch trackpad.";

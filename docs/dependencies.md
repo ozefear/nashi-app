@@ -19,6 +19,8 @@ Exact URLs, limits and hashes: [`ExternalToolSetup.swift`](../Sources/NashiCore/
 
 The first foreground launch opens the same two-group setup as macOS. Choose **Download missing tools**; media tools and Office tools install in sequence. Reopening an unfinished setup retries only missing groups. Image, PDF and ZIP features work immediately. Setup uses these pinned upstream releases:
 
+Smart background removal is separate from media/Office setup. The first time it is selected, Nashi asks before downloading the 4.4 MB U²-Net-P ONNX model, verifies its pinned SHA-256, and then runs it locally with Microsoft ONNX Runtime. Images are never uploaded. Cancelling or failing the download removes the staging file; Solid color mode remains available without a model. macOS 14 and later uses the operating system's local Vision foreground model, while macOS 13 offers Solid color mode.
+
 - [FFmpeg 9.0.2 full build, gyan.dev](https://github.com/GyanD/codexffmpeg/releases/tag/9.0.2), GPL. gyan.dev is listed by [FFmpeg’s official download page](https://ffmpeg.org/download.html). [Build information and sources](https://www.gyan.dev/ffmpeg/builds/).
 - The same yt-dlp and Deno releases above, using their Windows x64 assets.
 

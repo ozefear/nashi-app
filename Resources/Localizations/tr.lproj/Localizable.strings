@@ -1460,6 +1460,7 @@
 "METADATA TOOLS CHECKSUM MISMATCH." = "META VERİ ARAÇLARININ SAĞLAMA TOPLAMI EŞLEŞMİYOR.";
 "METADATA · NASHI" = "META VERİLER · NASHI";
 "MIDDLE THIRD" = "ORTA ÜÇTE BİR";
+"MODE" = "MOD";
 "MONO" = "MONO";
 "MONOSPACED" = "EŞ ARALIKLI";
 "MOVE" = "TAŞI";
@@ -1507,6 +1508,7 @@
 "Metadata tools checksum mismatch." = "Meta veri araçlarının sağlama toplamı eşleşmiyor.";
 "Metadata · Nashi" = "Meta Veriler · Nashi";
 "Middle third" = "Orta üçte bir";
+"Mode" = "Mod";
 "Mono" = "Mono";
 "Monospaced" = "Eş aralıklı";
 "Move" = "Taşı";
@@ -2154,7 +2156,13 @@
 "SMALLER FILES WITH LESS QUALITY LOSS." = "DAHA AZ KALİTE KAYBIYLA DAHA KÜÇÜK DOSYALAR.";
 "SMALLER FILES WITH STRONGER COMPRESSION." = "DAHA GÜÇLÜ SIKIŞTIRMAYLA DAHA KÜÇÜK DOSYALAR.";
 "SMALLEST" = "EN KÜÇÜK";
+"SMART" = "AKILLI";
+"SMART BACKGROUND REMOVAL" = "AKILLI ARKA PLAN KALDIRMA";
+"SMART BACKGROUND REMOVAL NEEDS A ONE-TIME 4.4 MB LOCAL MODEL DOWNLOAD. IMAGES ARE NEVER UPLOADED. DOWNLOAD IT NOW?" = "AKILLI ARKA PLAN KALDIRMA İÇİN TEK SEFERLİK 4,4 MB YEREL MODEL İNDİRMESİ GEREKİR. GÖRSELLER ASLA YÜKLENMEZ. ŞİMDİ İNDİRİLSİN Mİ?";
+"SMART RUNS A LOCAL MODEL FOR PEOPLE AND OBJECTS. SOLID COLOR IS FASTER FOR SIMPLE STUDIO BACKGROUNDS." = "AKILLI MOD KİŞİ VE NESNELER İÇİN YEREL BİR MODEL ÇALIŞTIRIR. DÜZ RENK MODU BASİT STÜDYO ARKA PLANLARINDA DAHA HIZLIDIR.";
+"SMART USES THE LOCAL SYSTEM MODEL TO FIND PEOPLE AND OBJECTS. IMAGES ARE NEVER UPLOADED." = "AKILLI MOD KİŞİ VE NESNELERİ BULMAK İÇİN YEREL SİSTEM MODELİNİ KULLANIR. GÖRSELLER ASLA YÜKLENMEZ.";
 "SOLID" = "DÜZ";
+"SOLID COLOR" = "DÜZ RENK";
 "SOUND AND HAPTIC FEEDBACK" = "SES VE DOKUNSAL GERİ BİLDİRİM";
 "SOUND FEEDBACK" = "SESLİ GERİ BİLDİRİM";
 "SOUND FOLLOWS YOUR MAC’S VOLUME. HAPTICS NEED A COMPATIBLE FORCE TOUCH TRACKPAD." = "SES, MAC'İNİN SES DÜZEYİNİ KULLANIR. TİTREŞİM İÇİN UYUMLU BİR FORCE TOUCH TRACKPAD GEREKİR.";
@@ -2325,7 +2333,13 @@
 "Smaller files with less quality loss." = "Daha az kalite kaybıyla daha küçük dosyalar.";
 "Smaller files with stronger compression." = "Daha güçlü sıkıştırmayla daha küçük dosyalar.";
 "Smallest" = "En küçük";
+"Smart" = "Akıllı";
+"Smart background removal" = "Akıllı arka plan kaldırma";
+"Smart background removal needs a one-time 4.4 MB local model download. Images are never uploaded. Download it now?" = "Akıllı arka plan kaldırma için tek seferlik 4,4 MB yerel model indirmesi gerekir. Görseller asla yüklenmez. Şimdi indirilsin mi?";
+"Smart runs a local model for people and objects. Solid color is faster for simple studio backgrounds." = "Akıllı mod kişi ve nesneler için yerel bir model çalıştırır. Düz renk modu basit stüdyo arka planlarında daha hızlıdır.";
+"Smart uses the local system model to find people and objects. Images are never uploaded." = "Akıllı mod kişi ve nesneleri bulmak için yerel sistem modelini kullanır. Görseller asla yüklenmez.";
 "Solid" = "Düz";
+"Solid color" = "Düz renk";
 "Sound and haptic feedback" = "Ses ve dokunsal geri bildirim";
 "Sound feedback" = "Sesli geri bildirim";
 "Sound follows your Mac’s volume. Haptics need a compatible Force Touch trackpad." = "Ses, Mac'inin ses düzeyini kullanır. Titreşim için uyumlu bir Force Touch trackpad gerekir.";

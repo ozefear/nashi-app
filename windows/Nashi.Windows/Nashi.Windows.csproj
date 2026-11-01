@@ -16,10 +16,13 @@
     <Content Include="../../scripts/pages-windows.js" Link="pages-windows.js" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="../../Resources/licenses/cupertino-files/**" Link="licenses/cupertino-files/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="../licenses/**" Link="licenses/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(PkgMicrosoft_ML_OnnxRuntime)/LICENSE" Link="licenses/ONNXRuntime-MIT.txt" CopyToOutputDirectory="PreserveNewest" Condition="'$(PkgMicrosoft_ML_OnnxRuntime)' != ''" />
+    <Content Include="$(PkgMicrosoft_ML_OnnxRuntime)/ThirdPartyNotices.txt" Link="licenses/ONNXRuntime-THIRD-PARTY-NOTICES.txt" CopyToOutputDirectory="PreserveNewest" Condition="'$(PkgMicrosoft_ML_OnnxRuntime)' != ''" />
     <Content Include="../../LICENSE" Link="LICENSE.txt" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="../THIRD-PARTY-NOTICES.txt" Link="THIRD-PARTY-NOTICES.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bblanchon.PDFium.Win32" Version="155.0.8044" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.23.2" GeneratePathProperty="true" />
   </ItemGroup>
 </Project>

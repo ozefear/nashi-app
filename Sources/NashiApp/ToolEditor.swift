@@ -11,6 +11,11 @@ struct ToolEditor:View {
     @State private var inputs:[URL]
     @MainActor init(state:AppState,tool:ToolKind) {
         self.state=state;self.tool=tool;originalInputs=state.inputs;_inputs=State(initialValue:state.inputs)
+        if tool == .removeBackground {
+            var value=OperationOptions()
+            if #available(macOS 14.0,*),!CommandLine.arguments.contains("--ui-audit") { value.backgroundRemovalMode="smart" }
+            _options=State(initialValue:value)
+        }
         if tool == .compress {
             let image=state.inputs.first.map{FileCategory.detect($0) == .image} ?? false
             let strength=image ? FormatPreferences.shared.imageCompressionStrength:FormatPreferences.shared.videoCompressionStrength
@@ -395,9 +400,12 @@ struct ToolEditor:View {
     }
     var backgroundRemovalControls:some View {
         VStack(alignment:.leading,spacing:14) {
-            Text("Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact.").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal:false,vertical:true)
-            slider("Tolerance",value:$options.backgroundRemovalTolerance,range:0...0.5,reset:0.12)
-            slider("Edge feather",value:$options.backgroundRemovalFeather,range:0...0.25,reset:0.03)
+            Picker("Mode",selection:$options.backgroundRemovalMode) { Text("Smart").tag("smart");Text("Solid color").tag("solid") }.pickerStyle(.segmented)
+            Text(options.backgroundRemovalMode == "smart" ? "Smart uses the local system model to find people and objects. Images are never uploaded.":"Removes a solid or near-solid background connected to the image edge. Enclosed matching colors stay intact.").font(.caption).foregroundStyle(.secondary).fixedSize(horizontal:false,vertical:true)
+            if options.backgroundRemovalMode == "solid" {
+                slider("Tolerance",value:$options.backgroundRemovalTolerance,range:0...0.5,reset:0.12)
+                slider("Edge feather",value:$options.backgroundRemovalFeather,range:0...0.25,reset:0.03)
+            }
             Label("The result is saved as a transparent PNG. Your original stays unchanged.",systemImage:"checkerboard.rectangle").font(.caption).foregroundStyle(.secondary)
         }
     }
@@ -638,7 +646,12 @@ struct ToolEditor:View {
     }
     func reset() {
         disposeMedia();previewToken=CancellationToken();visualizationToken=CancellationToken()
-        isLoading=true;readyToApply=false;inputs=originalInputs;options=OperationOptions()
+        isLoading=true;readyToApply=false;inputs=originalInputs
+        var resetOptions=OperationOptions()
+        if tool == .removeBackground {
+            if #available(macOS 14.0,*),!CommandLine.arguments.contains("--ui-audit") { resetOptions.backgroundRemovalMode="smart" }
+        }
+        options=resetOptions
         pdfEditor.reset();selectedSplitClip=nil;aspect="Free";cropInteracting=false;equalClips=2
         width=0;height=0;image=nil;baseImage=nil;imageSize=CGSize(width:100,height:100);pixelAspect=1;previewSize=nil;previewZoom=1;showOriginal=false
         duration=0;frameRate=30;playhead=0;playerReachedEnd=false;playingRange=false;processedPlayback=false;processedDuration=nil

@@ -111,7 +111,7 @@ public enum ImageEngine {
                 case .annotateImage: image=try annotate(image,options:options); suffix=" - Annotated"
                 case .redactImage: image=try redact(image,options:options); suffix=" - Redacted"
                 case .frameImage: image=try frame(image,options:options); suffix=" - Framed"
-                case .removeBackground: image=try removeBackground(image,options:options,token:token); suffix=" - No Background"
+                case .removeBackground: image=try (options.backgroundRemovalMode == "smart" ? smartRemoveBackground(image,token:token):removeBackground(image,options:options,token:token)); suffix=" - No Background"
                 default: throw NashiError.unsupported("\(kind.title) is not an image operation.")
                 }
                 let output=OutputFiles.unique(for:input,extension:kind == .annotateImage || kind == .removeBackground ? "png" : ext,suffix:suffix,directory:options.outputDirectory)
@@ -142,7 +142,7 @@ public enum ImageEngine {
         case .annotateImage: return try annotate(image,options:options)
         case .redactImage: return try redact(image,options:options)
         case .frameImage: return try frame(image,options:options)
-        case .removeBackground: return try removeBackground(image,options:options,token:.init())
+        case .removeBackground: return try (options.backgroundRemovalMode == "smart" ? smartRemoveBackground(image,token:.init()):removeBackground(image,options:options,token:.init()))
         case .cropImage:
             guard let crop=options.crop else { throw NashiError.invalidInput("Choose a crop rectangle.") }
             guard [crop.x,crop.y,crop.width,crop.height].allSatisfy(\.isFinite) else { throw NashiError.invalidInput("Crop coordinates must be finite.") }
@@ -215,6 +215,20 @@ public enum ImageEngine {
             guard let context=CGContext(data:bytes.baseAddress,width:width,height:height,bitsPerComponent:8,bytesPerRow:stride,space:imageColorSpace,bitmapInfo:CGImageAlphaInfo.premultipliedLast.rawValue),let result=context.makeImage() else { throw NashiError.failed("Could not create transparent image.") }
             return result
         }
+    }
+
+    public static func smartRemoveBackground(_ image:CGImage,token:CancellationToken) throws -> CGImage {
+        try token.check()
+        guard image.width>0,image.height>0,image.width<=100_000_000/image.height else { throw NashiError.invalidInput("This image is too large (100 MP limit).") }
+        guard #available(macOS 14.0,*) else { throw NashiError.unsupported("Smart background removal requires macOS 14 or later. Solid color mode remains available.") }
+        let request=VNGenerateForegroundInstanceMaskRequest(),handler=VNImageRequestHandler(cgImage:image)
+        try handler.perform([request]);try token.check()
+        guard let observation=request.results?.first,!observation.allInstances.isEmpty else { throw NashiError.invalidInput("A foreground subject could not be detected.") }
+        let buffer=try observation.generateScaledMaskForImage(forInstances:observation.allInstances,from:handler)
+        let source=CIImage(cgImage:image),mask=CIImage(cvPixelBuffer:buffer),transparent=CIImage(color:.clear).cropped(to:source.extent)
+        let result=source.applyingFilter("CIBlendWithMask",parameters:[kCIInputBackgroundImageKey:transparent,kCIInputMaskImageKey:mask])
+        guard let output=CIContext().createCGImage(result,from:source.extent) else { throw NashiError.failed("Could not create the transparent foreground image.") }
+        try token.check();return output
     }
 
     public static func editedImage(_ image: CGImage, options: OperationOptions) throws -> CGImage {

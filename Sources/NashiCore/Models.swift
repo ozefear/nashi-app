@@ -154,6 +154,7 @@ public struct OperationOptions: Codable, Sendable {
     public var imageFrame: ImageFrameOptions? = nil
     public var backgroundRemovalTolerance: Double = 0.12
     public var backgroundRemovalFeather: Double = 0.03
+    public var backgroundRemovalMode: String = "solid"
     public var collage: CollageOptions? = nil
     public var imageAnnotations: [ImageAnnotation] = []
     public var imageRedaction: ImageRedactionOptions? = nil

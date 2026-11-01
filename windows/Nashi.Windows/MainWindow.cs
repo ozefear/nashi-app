@@ -249,6 +249,13 @@ public sealed partial class MainWindow:Window
             var requestedFormat=choice.Id.StartsWith("convert:",StringComparison.Ordinal)?choice.Id[8..]:null;if(requestedFormat is not null)choice=new("convert","Convert to "+requestedFormat.ToUpperInvariant(),"↗");
             choice=choice with{Id=choice.Id switch{"cropImage"=>"crop","annotateImage"=>"annotate","mergePDF"=>"mergePDFs",_=>choice.Id}};
             SetBusy(true);var imageSelection=Images;var mediaSelection=Video||Audio;var selected=files.ToArray();MediaInfo? info=null;BitmapSource? preview=null;var input=selected[0];
+            if(choice.Id=="removeBackground"&&!BackgroundRemovalRuntime.Ready&&MessageBox.Show(this,L10n.Text("Smart background removal needs a one-time 4.4 MB local model download. Images are never uploaded. Download it now?"),L10n.Text("Smart background removal"),MessageBoxButton.YesNo,MessageBoxImage.Information)==MessageBoxResult.Yes)
+            {
+                using var modelCancellation=new CancellationTokenSource();var modelToast=new ToastWindow(this,modelCancellation.Cancel);modelToast.Show();
+                try{await BackgroundRemovalRuntime.EnsureAsync(new Progress<OperationProgress>(modelToast.Update),modelCancellation.Token);}
+                catch(OperationCanceledException){return;}
+                finally{modelToast.Close();}
+            }
             if(choice.Id=="removeMetadata"){SetBusy(false);await EditMetadataAsync(selected);return;}
             if(choice.Id=="readQRCode"){SetBusy(false);await ReadQrAsync(selected);return;}
             if(!imageSelection&&!mediaSelection&&choice.Id is not ("extractArchive" or "unzip")){SetBusy(false);await EditDocumentAsync(choice,selected,requestedFormat);return;}
